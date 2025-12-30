@@ -51,7 +51,7 @@ export class App {
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
     
-    const allowedOrigins = ['http://localhost:4200'];
+    const allowedOrigins = ['http://localhost:4200','https://pbharathcr7.github.io'];
 this.app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
