@@ -19,6 +19,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
+    "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
@@ -37,8 +38,8 @@
   },
   "include": ["src/**/*.ts", "src/**/*.json", ".env"],
   "exclude": [
-    "node_modules", 
-    "src/http", 
+    "node_modules",
+    "src/http",
     "src/logs",
     "src/test",
     "src/**/*.test.ts",
