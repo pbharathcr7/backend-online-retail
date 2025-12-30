@@ -1,5 +1,5 @@
 import { Service } from 'typedi';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/HttpException';
 import { Product } from '@interfaces/products.interface';
 import { ProductModel } from '@models/products.model';
 import { ProductFilters } from '@/interfaces/productFilters.interface';
@@ -24,27 +24,26 @@ export class ProductService {
       query.price.$lte = filters.maxPrice;
     }
 
-    if (filters.isActive === "true" || filters.isActive === "false") {
-      query.isActive = filters.isActive === "true"; //filters.isActive check whether is has "true" if so it returns true
+    if (filters.isActive === 'true' || filters.isActive === 'false') {
+      query.isActive = filters.isActive === 'true'; //filters.isActive check whether is has "true" if so it returns true
     }
 
     if (filters.searchTerm) {
-      query.productName = { $regex: filters.searchTerm, $options: "i" }; // Case-insensitive search
+      query.productName = { $regex: filters.searchTerm, $options: 'i' }; // Case-insensitive search
     }
 
     // Sorting
     const sort: any = {};
-    
+
     if (filters.sortBy) {
-      const sortDirection = filters.order === "desc" ? -1 : 1;
+      const sortDirection = filters.order === 'desc' ? -1 : 1;
       sort[filters.sortBy] = sortDirection;
     } else {
-      sort["price"] = 1; 
+      sort['price'] = 1;
     }
 
     return await ProductModel.find(query).sort(sort);
   }
-
 
   // Find a product by its ID
   public async findProductById(productId: string): Promise<Product> {
@@ -56,8 +55,8 @@ export class ProductService {
 
   // Create a new product
   public async createProduct(productData: Product): Promise<Product> {
-    const findProduct: Product = await ProductModel.findOne({ productName: productData.productName});
-    if (findProduct) throw new HttpException(409, "Product Already exist");
+    const findProduct: Product = await ProductModel.findOne({ productName: productData.productName });
+    if (findProduct) throw new HttpException(409, 'Product Already exist');
     const createProductData: Product = await ProductModel.create({ ...productData });
 
     return createProductData;
